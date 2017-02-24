@@ -6,6 +6,17 @@ scroll.scrollHorizontal = false
 sketch.screen.addChild(scroll)
 scroll.placeBehind(sketch.status_bar)
 
+for layer in sketch.tasks.children
+	check = layer.children[0]
+	check.states.incomplete =
+		saturate: 0
+	check.states.complete =
+		saturate: 100
+	
+	check.stateSwitch("incomplete")
+	check.on Events.Tap, (event, layer) ->
+		layer.stateCycle("complete", "incomplete")
+
 sketch.FAB.x = 456
 
 menu = new Layer
