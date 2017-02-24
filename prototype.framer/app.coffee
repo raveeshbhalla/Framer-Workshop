@@ -24,3 +24,24 @@ sketch.FAB.onTap ->
 
 menu.onTap ->
 	flow.showPrevious()
+
+currentScroll = 0
+
+sketch.FAB.states.hidden =
+	scale: 0
+	animationOptions:
+		curve: Spring(damping: 0.5)
+		time: 0.5
+
+sketch.FAB.states.default =
+	scale: 1
+	animationOptions:
+		curve: Spring(damping: 0.5)
+		time: 0.5
+
+scroll.onScroll ->
+	if (scroll.scrollY > currentScroll)
+		sketch.FAB.animate("hidden")
+	else
+		sketch.FAB.animate("default")
+	currentScroll = scroll.scrollY
